@@ -1,6 +1,6 @@
 <h1>Create a New Article</h1>
 
-<%= form_for(@article) do |form| %>
+<%= form_for(@article, html: {multipart: true}) do |form| %>
 <ul>
   <% @article.errors.full_messages.each do |error| %>
   <li> <%= error %>  </li>
@@ -17,6 +17,13 @@
 <p>
   <%= form.label :tag_list %><br />
   <%= form.text_field :tag_list %>
+</p>
+<p>
+  <% if @article.image.exists? %>
+      <%= image_tag @article.image.url %><br/>
+  <% end %>
+  <%= form.label :image, "Attach a New Image" %><br />
+  <%= form.file_field :image %>
 </p>
 <p>
   <%= form.submit %>
